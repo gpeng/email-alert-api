@@ -48,6 +48,8 @@ private
 
         #{presented_unsubscribe_links(subscriptions)}
 
+        #{presented_manage_subscriptions_links}
+
         &nbsp;
 
         ^Is this email useful? [Answer some questions to tell us more](https://www.smartsurvey.co.uk/s/govuk-email/?f=immediate).
@@ -57,6 +59,13 @@ private
 
   def presented_content_change(content_change)
     ContentChangePresenter.call(content_change, frequency: "immediate")
+  end
+
+  def presented_manage_subscriptions_links
+    address = recipients_and_content.map do |recipient_and_content|
+      recipient_and_content.fetch(:subscriber_id)
+    end.join
+    ManageSubscriptionsLinkPresenter.call(subscriber_id: subscriber_id)
   end
 
   def presented_unsubscribe_links(subscriptions)

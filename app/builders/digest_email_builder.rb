@@ -48,6 +48,8 @@ private
     <<~BODY
       You’re getting this email because you subscribed to these topic updates on GOV.UK.
 
+      #{presented_manage_subscriptions_links}
+
       &nbsp;
 
       ^Is this email useful? [Answer some questions to tell us more](https://www.smartsurvey.co.uk/s/govuk-email/?f=digests).
@@ -86,5 +88,9 @@ private
       id: result.subscription_id,
       title: result.subscriber_list_title
     )
+  end
+
+  def presented_manage_subscriptions_links
+    ManageSubscriptionsLinkPresenter.call(subscriber_id: subscriber.id)
   end
 end
