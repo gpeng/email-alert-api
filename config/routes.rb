@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     get "/healthcheck", to: "healthcheck#check"
 
     constraints address: /.+@.+\..+/ do
+      post "/subscribers/:address/auth-token", to: "subscribers#auth_token"
       patch "/subscribers/:address", to: "subscribers#change_address"
       get "/subscribers/:address/subscriptions", to: "subscribers#subscriptions"
     end
